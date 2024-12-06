@@ -25,7 +25,6 @@ class GuardMoves:
   def turn_guard(direction: Direction):
     return GuardMoves.Direction((direction.value % 4) + 1)
 
-
 class GuardPathSolver:
 
   GUARD = '^'
@@ -69,7 +68,6 @@ class GuardPathSolver:
 
   def solve(self):
     guard_position = self.locate_guard()
-    previous_guard_position = guard_position
     direction = GuardMoves.Direction.UP
     locations = []
     locations_with_directions = set()
@@ -78,7 +76,6 @@ class GuardPathSolver:
       # to be able to look up previous location and direction, create a hashable object
       guard_position_hashable = self.GuardPosition(direction, guard_position).to_string()
       if guard_position_hashable in locations_with_directions:
-        # the guard is stuck in a loop
         raise self.GuardIsStuckInALoop("the guard is in a loop!")
       locations.append(guard_position.to_string())
       locations_with_directions.add(guard_position_hashable)
@@ -105,8 +102,12 @@ def part_two(map):
   locations = GuardPathSolver(map).solve()
   obstacle_locations = set()
 
-  # the first location is the starting position, can't put an obstacle there
-  for location in locations:
+  # on every point in the path that isn't the starting location, try adding an obstacle
+  # and check if the guard gets stuck
+  # it would be more efficient to start the solver over from the position immediately before
+  # adding the obstacle, but to do so you need to retain the previous position (not hard)
+  # and the direction the guard was facing (more refactoring than I have time for today)
+  for location in locations[1:]:
     # we can't add an obstacle where the guard starts
     if location == locations[0]:
       continue
@@ -118,7 +119,6 @@ def part_two(map):
       # this obstacle caused the guard to get stuck, so save the location
       obstacle_locations.add(location)
     map = remove_obstacle_from_map(map, position.row_i, position.col_i)
-
   print("obstacle locations:", len(obstacle_locations))
   return obstacle_locations
 
