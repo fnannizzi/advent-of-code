@@ -1,4 +1,4 @@
-from my_io import read_input
+from my_io import *
 from enum import Enum
 import math
 class Rule:
