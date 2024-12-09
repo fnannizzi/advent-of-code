@@ -1,5 +1,5 @@
-from my_io import read_input
-from grid_utils import *
+from utils.my_io import read_input
+from utils.grid_utils import *
 from enum import Enum
 
 class GuardMoves:

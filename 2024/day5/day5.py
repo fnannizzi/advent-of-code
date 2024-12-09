@@ -1,4 +1,4 @@
-from my_io import *
+from utils.my_io import *
 from enum import Enum
 import math
 class Rule:

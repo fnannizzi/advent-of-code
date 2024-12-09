@@ -1,4 +1,4 @@
-from my_io import read_input
+from utils.my_io import read_input
 
 list_left  = []
 list_right = []

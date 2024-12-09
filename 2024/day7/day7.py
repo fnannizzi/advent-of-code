@@ -1,4 +1,4 @@
-from my_io import read_input
+from utils.my_io import read_input
 from enum import Enum
 import re
 import itertools
@@ -18,7 +18,6 @@ def generate_all_operator_combinations(num_operators: int, with_concat=False):
 def concat_nums(left: int, right: int):
   return int(str(left) + str(right))
 
-
 def calculate_result_from_nums_and_operators(nums: [], operators: []):
   result = nums[0]
   for i in range(len(nums[1:])):
@@ -31,7 +30,6 @@ def calculate_result_from_nums_and_operators(nums: [], operators: []):
     else:
       assert "Invalid operator type:" + operators[i]
   return result
-
 
 def eqn_is_valid(nums: [], with_concat=False):
   result = nums[0]
@@ -57,7 +55,11 @@ def parse_input(input):
     eqns.append([int(s) for s in re.findall(r'\d+', line)])
   return eqns
 
+import time
 if __name__ == '__main__':
   eqns = parse_input(read_input('input.txt'))
   print("sum of valid equations: " + str(get_sum_of_valid_eqns(eqns, with_concat=False)))
+  start_time = time.time()
   print("sum of valid equations with concatenation: " + str(get_sum_of_valid_eqns(eqns, with_concat=True)))
+  end_time = time.time()
+  print(end_time - start_time)

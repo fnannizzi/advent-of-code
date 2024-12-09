@@ -1,4 +1,4 @@
-from my_io import read_input
+from utils.my_io import read_input
 
 def pair_is_safe(increasing, first, second):
   diff = second - first

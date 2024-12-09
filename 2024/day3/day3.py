@@ -1,5 +1,5 @@
 import re
-from my_io import read_input
+from utils.my_io import read_input
 
 def get_mul_operations(input):
   return re.findall("mul\(\d+,\d+\)", input)

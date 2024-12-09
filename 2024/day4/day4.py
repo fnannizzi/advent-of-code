@@ -1,4 +1,4 @@
-from my_io import read_input, convert_to_array_matrix
+from utils.my_io import read_input, convert_to_array_matrix
 
 search_length_xmas = 4
 XMAS = ['X', 'M', 'A', 'S']
